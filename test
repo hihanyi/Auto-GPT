@@ -1,0 +1,1331 @@
+<template>
+  <div class="container">
+
+      <h3 class="form-sub-title">第{{pageIndexes}}台压力容器基本信息（{{device.equipmentCode}}）</h3>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="产权单位名称" >
+            <el-input maxlength="20"
+                      v-model="device.propertyUnitName"
+                      placeholder="请输入产权单位名称"
+                      :disabled="checkDeviceInfo('propertyUnitName',serVar.changeOfCompanyName,serVar.equipmentTransfer)"
+            >
+              <el-button v-if="!checkDeviceInfo('propertyUnitName',serVar.changeOfCompanyName,serVar.equipmentTransfer)"
+                  slot="append"
+                  @click="queryBaseInfo(1)"
+                  icon="el-icon-search"
+              ></el-button>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="产权单位统一社会信用代码" >
+            <el-input maxlength="20"
+                      v-model="device.propertyUniscid"
+                      placeholder="请输入产权单位统一社会信用代码"
+                      :disabled="checkDeviceInfo('propertyUniscid',serVar.equipmentTransfer)"
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-divider></el-divider>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="制造单位名称"
+              prop="equManufUnit"
+          >
+            <el-input maxlength="20"
+                      v-model="device.equManufUnit"
+                      placeholder="请输入制造单位名称"
+
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="施工单位名称"
+              prop="installUnit"
+          >
+            <el-input maxlength="20"
+                      v-model="device.installUnit"
+                      placeholder="请输入制造单位名称"
+
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="制造单位统一社会信用代码"
+              prop="equManufUniscid"
+          >
+            <el-input maxlength="20"
+                      v-model="device.equManufUniscid"
+                      placeholder="请输入制造单位统一社会信用代码"
+
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="施工单位统一社会信用代码"
+              prop="installUniscid"
+          >
+            <el-input maxlength="20"
+                      v-model="device.installUniscid"
+                      placeholder="请输入制造单位统一社会信用代码"
+
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="制造单位许可证号"
+              prop="manufNvqNo"
+          >
+            <el-input maxlength="20"
+                      v-model="device.manufNvqNo"
+                      placeholder="请输入制造单位许可证号"
+
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="施工单位许可证号"
+              prop="installNvqNo"
+          >
+            <el-input maxlength="20"
+                      v-model="device.installNvqNo"
+                      placeholder="请输入制造单位许可证号"
+
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item
+              label="监督检验机构名称"
+              prop="propertyMonitorUnit"
+          >
+            <el-input maxlength="20"
+                      v-model="device.propertyMonitorUnit"
+                      placeholder="请输入制造单位名称"
+
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="施工单位法定代表人（负责人）"
+              prop="installLegalPerson"
+          >
+            <el-input maxlength="20"
+                      v-model="device.installLegalPerson"
+                      placeholder="请输入施工单位法定代表人（负责人）"
+
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="监检单位统一社会信用代码"
+              prop="monitorUniscid"
+          >
+            <el-input maxlength="20"
+                      v-model="device.monitorUniscid"
+                      placeholder="请输入制造单位统一社会信用代码"
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="施工单位法定代表人手机号"
+              prop="installMobTel"
+          >
+            <el-input maxlength="20"
+                      v-model="device.installMobTel"
+                      placeholder="请输入施工单位法定代表人手机号"
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="监检单位许可证编号"
+              prop="monitorNvqNo"
+          >
+            <el-input maxlength="20"
+                      v-model="device.monitorNvqNo"
+                      placeholder="请输入制造单位许可证编号"
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+              label="施工单位工程负责人"
+              prop="installProjectMan"
+          >
+            <el-input maxlength="20"
+                      v-model="device.installProjectMan"
+                      placeholder="请输入施工单位工程负责人"
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item
+              label="施工单位工程负责人手机号"
+              prop="installProjectManMobTel"
+          >
+            <el-input maxlength="20"
+                      v-model="device.installProjectManMobTel"
+                      placeholder="请输入施工单位工程负责人手机号"
+            >
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-divider></el-divider>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="使用证编号" v-if="disDevice&&busiObj.handleTypeOne!== serVar.useRegistration">
+            <el-input maxlength="20" v-model="device.licenseNo" disabled></el-input>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12" v-if="disDevice || $store.state.device.device.mobilePressureVessel===device.equipmentCategory">
+          <el-form-item :label="$store.state.device.device.mobilePressureVessel===device.equipmentCategory?'国家注册代码':'设备代码'" prop="equipmentCode">
+            <el-input maxlength="20"
+                      v-model="device.equipmentCode"
+                      :disabled="disDevice"
+                      :placeholder="$store.state.device.device.mobilePressureVessel===device.equipmentCategory?'请输入18位国家注册代码':''"
+            ></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="单位内部编号">
+            <el-input maxlength="20" v-model="device.unitInnerNo" :disabled="checkDeviceInfo('unitInnerNo')"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="出厂编号">
+            <el-input maxlength="20" v-model="device.outNo" :disabled="checkDeviceInfo('outNo')"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" v-if="disDevice">
+          <el-form-item label="所属管理所" >
+            <el-select v-model="device.managementDepend"  disabled>
+              <el-option
+                  v-for="(org, index) in orgList"
+                  :key="index"
+                  :value="org.id"
+                  :label="org.unitName"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="设备使用地点" required>
+            <el-col :span="2">
+              <el-form-item class="original-el-form-item">
+                <el-input value="广州市" disabled>
+                  <el-option value="广州市"/>
+                </el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="1">-</el-col>
+            <el-col :span="3">
+              <el-form-item class="original-el-form-item" prop="equArea">
+                <el-select v-model="device.equArea" @change="(selected) => districtChange(selected, device)"
+                           :disabled="(checkDeviceInfo('equArea',serVar.changeOfEquipmentUsePlace,serVar.equipmentTransfer)&&disDevice)||busiObj.district!=='0'">
+                  <el-option
+                      v-for="(district, index) in districtList"
+                      :key="index"
+                      :value="district.id"
+                      :label="district.title"
+                  />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="1">-</el-col>
+            <el-col :span="3">
+              <el-form-item prop="street">
+                <el-select v-model="device.street"
+                           :disabled="checkDeviceInfo('street',serVar.changeOfEquipmentUsePlace,serVar.equipmentTransfer)&&disDevice">
+                  <el-option v-for="(street, index) in device.streetList"
+                             :key="index"
+                             :value="street.id"
+                             :label="street.title"
+                  />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="1">-</el-col>
+            <el-col :span="13">
+              <el-form-item prop="equDetail">
+                <el-input maxlength="300" v-model="device.equDetail" placeholder="请输入详细地点"
+                          :disabled="checkDeviceInfo('equDetail',serVar.changeOfEquipmentUsePlace,serVar.equipmentTransfer)&&disDevice"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+    <el-collapse ref="myCollapse" :value="collapseActiveName">
+      <el-collapse-item name="1" v-model="isActive1">
+        <template slot="title">
+          <div style="width: 100%" @click="handleClick1()">
+            <h3 class="form-sub-title"><i class="el-icon-arrow-right" :class="{ 'isActive': isActive1}" :disabled="checkDeviceInfo('propertyUnitName')"></i>设备详细参数</h3>
+          </div>
+        </template>
+        <el-row>
+        <el-col :span="12">
+          <el-form-item label="设备类别" prop="equipmentCategory">
+            <el-select
+                v-model="device.equipmentCategory"
+                @change="(selected) => categoryChange(selected, device)"
+                disabled
+            >
+              <el-option
+                  v-for="(category, index) in categoryList"
+                  :key="index"
+                  :value="category.id"
+                  :label="category.title"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" v-if="device.varietyList&&(device.varietyList.length>1||(device.varietyList.length===1&&device.varietyList[0].id!==device.equipmentCategory))">
+          <el-form-item label="设备品种"  prop="equVariety">
+            <el-select v-model="device.equVariety" :disabled="disDevice||(this.busiObj.district==='0'&&this.busiObj.deviceName==='YLRQ-3')">
+              <el-option
+                  v-for="(variety, index) in device.varietyList"
+                  :key="index"
+                  :label="variety.title"
+                  :value="variety.id"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="设备型号">
+            <el-input maxlength="20" v-model="device.equipmentModel" :disabled="checkDeviceInfo('equipmentModel')||disDevice"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="主体结构形式">
+            <el-select v-model="device.majoStructureForm" :disabled="checkDeviceInfo('majoStructureForm')||disDevice">
+              <el-option
+                  v-for="(boiType, index) in boiTypeList"
+                  :key="index"
+                  :label="boiType.title"
+                  :value="boiType.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+<!--        <el-col :span="12">
+          <el-form-item label="保温">
+            <el-select v-model="device.keepWarmForm" :disabled="checkDeviceInfo('keepWarmForm')">
+              <el-option
+                  v-for="(boiType, index) in keepWarmFormList"
+                  :key="index"
+                  :label="boiType.title"
+                  :value="boiType.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>-->
+        <el-col :span="12">
+          <el-form-item label="容器内径">
+            <el-input maxlength="20" v-model="device.conInnDia" :disabled="checkDeviceInfo('conInnDia')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="筒体材料">
+            <el-select v-model="device.pcBarrelMaterial" :disabled="checkDeviceInfo('pcBarrelMaterial')||disDevice">
+              <el-option
+                  v-for="(pcBarrel, index) in pcBarrelList"
+                  :key="index"
+                  :label="pcBarrel.title"
+                  :value="pcBarrel.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" v-if="device.pcBarrelMaterial==$store.state.enum.pressure.otherMaterials">
+          <el-form-item label="其他筒体材料">
+            <el-input maxlength="20" v-model="device.pcOtherBarrelMaterial" :disabled="checkDeviceInfo('pcOtherBarrelMaterial')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="封头材料">
+            <el-select v-model="device.pcHeadMaterial" :disabled="checkDeviceInfo('pcHeadMaterial')||disDevice">
+              <el-option
+                  v-for="(pcHead, index) in pcHeadList"
+                  :key="index"
+                  :label="pcHead.title"
+                  :value="pcHead.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="其他封头材料" v-if="device.pcHeadMaterial==$store.state.enum.pressure.otherMaterials">
+            <el-input maxlength="20" v-model="device.pcOtherHeadMaterial" :disabled="checkDeviceInfo('pcOtherHeadMaterial')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="内衬材料">
+            <el-select v-model="device.pcLiningMaterial" :disabled="checkDeviceInfo('pcLiningMaterial')||disDevice">
+              <el-option
+                  v-for="(pcLining, index) in pcLiningList"
+                  :key="index"
+                  :label="pcLining.title"
+                  :value="pcLining.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="其他内衬材料" v-if="device.pcLiningMaterial==$store.state.enum.pressure.otherMaterials">
+            <el-input maxlength="20" v-model="device.pcOtherLiningMaterial" :disabled="checkDeviceInfo('pcOtherLiningMaterial')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套材料">
+            <el-select v-model="device.pcJacketMaterial" :disabled="checkDeviceInfo('pcJacketMaterial')||disDevice">
+              <el-option
+                  v-for="(pcJacket, index) in pcJacketList"
+                  :key="index"
+                  :label="pcJacket.title"
+                  :value="pcJacket.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="其他夹套材料" v-if="device.pcJacketMaterial==$store.state.enum.pressure.otherMaterials">
+            <el-input maxlength="20" v-model="device.pcOtherJacketMaterial" :disabled="checkDeviceInfo('pcOtherJacketMaterial')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="容器容积">
+            <el-input maxlength="20" v-model="device.pcVolume"
+                      :disabled="checkDeviceInfo('pcVolume')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0.03||value>1000000) { value = 0.03 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcVolume = $event.target.value">
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="容器高">
+            <el-input maxlength="20" v-model="device.pcHeight" :disabled="checkDeviceInfo('pcHeight')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcHeight = $event.target.value"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="容器高/长">
+            <el-input maxlength="20" v-model="device.containerHeight" :disabled="checkDeviceInfo('containerHeight')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.containerHeight = $event.target.value"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="壳程设计压力">
+            <el-input maxlength="20" v-model="device.pcShellDesignPres"
+                      :disabled="checkDeviceInfo('pcShellDesignPres')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcShellDesignPres = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="壳程设计温度">
+            <el-input maxlength="20" v-model="device.pcShellDesignTemp"
+                      :disabled="checkDeviceInfo('pcShellDesignTemp')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcShellDesignTemp = $event.target.value">
+              <template #append>℃</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="壳程最高允许工作压力">
+            <el-input maxlength="20" v-model="device.pcShellTopPress"
+                      :disabled="checkDeviceInfo('pcShellTopPress')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcShellTopPress = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="管程设计压力">
+            <el-input maxlength="20" v-model="device.pcTubeDesignPres"
+                      :disabled="checkDeviceInfo('pcTubeDesignPres')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcTubeDesignPres = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="管程设计温度">
+            <el-input maxlength="20" v-model="device.pcTubeDesignTemp"
+                      :disabled="checkDeviceInfo('pcTubeDesignTemp')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcTubeDesignTemp = $event.target.value">
+              <template #append>℃</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="管程最高允许工作压力">
+            <el-input maxlength="20" v-model="device.pcTubeTopPress"
+                      :disabled="checkDeviceInfo('pcTubeTopPress')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcTubeTopPress = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套设计压力">
+            <el-input maxlength="20" v-model="device.pcJacketDesignPres"
+                      :disabled="checkDeviceInfo('pcJacketDesignPres')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcJacketDesignPres = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套设计温度">
+            <el-input maxlength="20" v-model="device.pcJacketDesignTemp"
+                      :disabled="checkDeviceInfo('pcJacketDesignTemp')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcJacketDesignTemp = $event.target.value">
+              <template #append>℃</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套最高允许工作压力">
+            <el-input maxlength="20" v-model="device.pcJacketMaxPres"
+                      :disabled="checkDeviceInfo('pcJacketMaxPres')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcJacketMaxPres = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="壳程介质">
+            <el-select v-model="device.pcShellMedium" :disabled="checkDeviceInfo('pcShellMedium')||disDevice">
+              <el-option
+                  v-for="(pcShell, index) in transportMediumList"
+                  :key="index"
+                  :label="pcShell.title"
+                  :value="pcShell.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="壳程介质危险类别">
+            <el-select v-model="device.pcShellMediumHazardCategory" @change="(selected) => toxicityChange(selected, device)" :disabled="true||disDevice">
+              <el-option
+                  v-for="(pcShell, index) in transportMediumHazardCategoryList"
+                  :key="index"
+                  :label="pcShell.title"
+                  :value="pcShell.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" v-if="device.pcShellMediumHazardCategory === '7104605395082430821'">
+          <el-form-item label="毒性程度">
+            <el-select v-model="device.toxicityDegree" :disabled="true||disDevice">
+              <el-option
+                  v-for="(pcShell, index) in device.toxicityDegreeList"
+                  :key="index"
+                  :label="pcShell.title"
+                  :value="pcShell.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+
+
+
+        <el-col :span="12">
+          <el-form-item label="管程介质">
+            <el-select v-model="device.pcTubeMedium" :disabled="checkDeviceInfo('pcTubeMedium')||disDevice">
+              <el-option
+                  v-for="(pcTube, index) in transportMediumList"
+                  :key="index"
+                  :label="pcTube.title"
+                  :value="pcTube.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套介质">
+            <el-select v-model="device.pcJacketMedium" :disabled="checkDeviceInfo('pcJacketMedium')||disDevice">
+              <el-option
+                  v-for="(pcJacketMedium, index) in transportMediumList"
+                  :key="index"
+                  :label="pcJacketMedium.title"
+                  :value="pcJacketMedium.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="是否快开门">
+            <el-select v-model="device.pcIsFastOpendoor" :disabled="checkDeviceInfo('pcIsFastOpendoor')||disDevice">
+              <el-option
+                  v-for="(pcIsFast, index) in pcIsFastList"
+                  :key="index"
+                  :label="pcIsFast.title"
+                  :value="pcIsFast.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="安全评定等级">
+            <el-select v-model="device.securityLevel" :disabled="checkDeviceInfo('securityLevel')||disDevice">
+              <el-option
+                  v-for="(securityLevel, index) in securityLevelList"
+                  :key="index"
+                  :label="securityLevel.title"
+                  :value="securityLevel.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="筒体厚度">
+            <el-input maxlength="20" v-model="device.pcBarrelThickness"
+                      :disabled="checkDeviceInfo('pcBarrelThickness')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcBarrelThickness = $event.target.value">
+              <template #append>mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="封头厚度">
+            <el-input maxlength="20" v-model="device.pcHeadThickness"
+                      :disabled="checkDeviceInfo('pcHeadThickness')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcHeadThickness = $event.target.value">
+              <template #append>mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="内衬厚度">
+            <el-input maxlength="20" v-model="device.pcLiningThickness"
+                      :disabled="checkDeviceInfo('pcLiningThickness')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcLiningThickness = $event.target.value">
+              <template #append>mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套厚度">
+            <el-input maxlength="20" v-model="device.pcJacketThickness"
+                      :disabled="checkDeviceInfo('pcJacketThickness')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcJacketThickness = $event.target.value">
+              <template #append>mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="充装重量">
+            <el-input maxlength="20" v-model="device.fillingWeight"
+                      :disabled="checkDeviceInfo('fillingWeight')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.fillingWeight = $event.target.value">
+              <template #append>Kg</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="壳体重量">
+            <el-input maxlength="20" v-model="device.shellWeight"
+                      :disabled="checkDeviceInfo('shellWeight')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.shellWeight = $event.target.value">
+              <template #append>Kg</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="内件重量">
+            <el-input maxlength="20" v-model="device.internalsWeight"
+                      :disabled="checkDeviceInfo('internalsWeight')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.internalsWeight = $event.target.value">
+              <template #append>Kg</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="有无保温绝热">
+            <el-select v-model="device.pcIsHeatInsulation" :disabled="checkDeviceInfo('pcIsHeatInsulation')||disDevice">
+              <el-option
+                  v-for="(pcIsHeatInsulation, index) in pcIsHeatInsulationList"
+                  :key="index"
+                  :label="pcIsHeatInsulation.title"
+                  :value="pcIsHeatInsulation.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="壳程使用工作压力">
+            <el-input maxlength="20" v-model="device.shellUsePress"
+                      :disabled="checkDeviceInfo('shellUsePress')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.shellUsePress = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="管程使用工作压力">
+            <el-input maxlength="20" v-model="device.tubUsePress"
+                      :disabled="checkDeviceInfo('tubUsePress')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.tubUsePress = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套使用工作压力">
+            <el-input maxlength="20" v-model="device.coverUsePress"
+                      :disabled="checkDeviceInfo('coverUsePress')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = '' }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.coverUsePress = $event.target.value">
+              <template #append>Mpa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="换热面积">
+            <el-input maxlength="20" v-model="device.heatExchangeArea"
+                      :disabled="checkDeviceInfo('heatExchangeArea')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.heatExchangeArea = $event.target.value">
+              <template #append>㎡</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="壳程（内胆）工作温度">
+            <el-input maxlength="20" v-model="device.shellWorkTempext"
+                      :disabled="checkDeviceInfo('shellWorkTempext')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.shellWorkTempext = $event.target.value">
+              <template>℃</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套工作温度">
+            <el-input maxlength="20" v-model="device.coverUseTempext"
+                      :disabled="checkDeviceInfo('coverUseTempext')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.coverUseTempext = $event.target.value">
+              <template>℃</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="管程工作温度">
+            <el-input maxlength="20" v-model="device.tubUseTempext"
+                      :disabled="checkDeviceInfo('tubUseTempext')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.tubUseTempext = $event.target.value">
+              <template>℃</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="换热管材料">
+            <el-input maxlength="20" v-model="device.hotTranmeter" :disabled="checkDeviceInfo('hotTranmeter')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="换热管厚度">
+            <el-input maxlength="20" v-model="device.hotTranthick"
+                      :disabled="checkDeviceInfo('hotTranthick')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.hotTranthick = $event.target.value">
+              <template>mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="封头型式">
+            <el-select v-model="device.sealType" :disabled="checkDeviceInfo('sealType')||disDevice">
+              <el-option
+                  v-for="(sealType, index) in sealTypeList"
+                  :key="index"
+                  :label="sealType.title"
+                  :value="sealType.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="支座型式">
+            <el-select v-model="device.basesType" :disabled="checkDeviceInfo('basesType')||disDevice">
+              <el-option
+                  v-for="(basesType, index) in basesTypeList"
+                  :key="index"
+                  :label="basesType.title"
+                  :value="basesType.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="压力类别">
+            <el-select v-model="device.pressureRating" :disabled="checkDeviceInfo('pressureRating')||disDevice">
+              <el-option
+                  v-for="(basesType, index) in pressureRatingList"
+                  :key="index"
+                  :label="basesType.title"
+                  :value="basesType.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="压力容器品种">
+            <el-select v-model="device.categoryPurpose" :disabled="checkDeviceInfo('categoryPurpose')||disDevice">
+              <el-option
+                  v-for="(basesType, index) in categoryPurposeList"
+                  :key="index"
+                  :label="basesType.title"
+                  :value="basesType.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="容器分类">
+            <el-select v-model="device.pcClassify" :disabled="checkDeviceInfo('pcClassify')||disDevice">
+              <el-option
+                  v-for="(pcClassify, index) in pcClassifyList"
+                  :key="index"
+                  :label="pcClassify.title"
+                  :value="pcClassify.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="容器名称">
+            <el-input maxlength="20" v-model="device.pcName" :disabled="checkDeviceInfo('pcName')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="制造国">
+            <el-input maxlength="20" v-model="device.manufCountry" :disabled="checkDeviceInfo('manufCountry')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="制造日期">
+            <el-date-picker v-model="device.manufDate" :disabled="checkDeviceInfo('manufDate')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="安装竣工日期">
+            <el-date-picker v-model="device.insCompleteDate" :disabled="checkDeviceInfo('insCompleteDate')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="投用日期">
+            <el-date-picker v-model="device.equEnableDate" :disabled="checkDeviceInfo('equEnableDate')||disDevice"/>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="容器直径">
+            <el-input maxlength="20" v-model="device.pcDiameter"
+                      :disabled="checkDeviceInfo('pcDiameter')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcDiameter = $event.target.value">
+              <template #append>mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="壳程最高压力">
+            <el-input maxlength="20" v-model="device.pcShellMaxPres"
+                      :disabled="checkDeviceInfo('pcShellMaxPres')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcShellMaxPres = $event.target.value">
+              <template #append>MPa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="管程最高压力">
+            <el-input maxlength="20" v-model="device.pcTubeMaxPres"
+                      :disabled="checkDeviceInfo('pcTubeMaxPres')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcTubeMaxPres = $event.target.value">
+              <template #append>MPa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="夹套最高压力">
+            <el-input maxlength="20" v-model="device.pcJacketMaxPres"
+                      :disabled="checkDeviceInfo('pcJacketMaxPres')||disDevice"
+                      oninput="if((value.length===1&&(value[0]===0||value[0]==='-'))||(value.length===2&&value[1]==='.')){}else if(isNaN(value)||value<0||value>1000000) { value = 0 }
+                              else{if (value.indexOf('.')<0){ value = isNaN(parseInt(value))?null:parseInt(value)}else{ value=value.slice(0,value.indexOf('.')+5)}}"
+                      @blur="device.pcJacketMaxPres = $event.target.value">
+              <template #append>MPa</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" v-if="device.equVariety===this.$store.state.device.device.medicalOxygenChamber">
+          <el-form-item label="医用氧舱使用人数" prop="numberOfPeople">
+            <el-input-number :min="0" :max="100000" :precision="0" v-model="device.numberOfPeople"
+                             style="width:100%"
+                             :disabled="checkDeviceInfo('numberOfPeople')"
+            >
+            </el-input-number>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="下次全面检验日期">
+            <el-date-picker v-model="device.nextOverallDate" :disabled="checkDeviceInfo('nextOverallDate')"/>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      </el-collapse-item>
+      <el-collapse-item name="2" v-model="isActive2">
+        <template slot="title">
+          <div style="width: 100%" @click="handleClick2()">
+            <h3 class="form-sub-title"><i class="el-icon-arrow-right" :class="{ 'isActive': isActive2}"></i>设备检验情况</h3>
+          </div>
+        </template>
+        <el-row>
+        <el-col :span="12">
+          <el-form-item label="检验机构名称" :prop="disDevice?'':'inspectInstitution'" required>
+            <el-input
+                v-model="device.inspectInstitution"
+                :disabled="disDevice"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="检验类别" :prop="disDevice?'':'inspectType'" required>
+            <el-select
+                v-model="device.inspectType"
+                :disabled="disDevice"
+            >
+              <el-option
+                  v-for="(inspectType, index) in inspectTypeList"
+                  :key="index"
+                  :value="inspectType.id"
+                  :label="inspectType.title"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="检验报告编号" :prop="disDevice?'':'reportNo'" required>
+            <el-input
+                v-model="device.reportNo"
+                :disabled="disDevice"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="检验日期" :prop="disDevice?'':'inspectionDate'" required>
+            <el-date-picker
+                v-model="device.inspectionDate"
+                :disabled="disDevice"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="检验结论" :prop="disDevice?'':'inspectionItemConclusion'" required>
+            <el-select
+                v-model="device.inspectionItemConclusion"
+                :disabled="disDevice"
+            >
+              <el-option
+                  v-for="(inspectionItemConclusion, index) in inspectionItemConclusionList"
+                  :key="index"
+                  :value="inspectionItemConclusion.id"
+                  :label="inspectionItemConclusion.title"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" v-if="disDevice">
+          <el-form-item label="约检日期" :prop="disDevice?'':'appointDate'" required>
+            <el-date-picker
+                v-model="device.appointDate"
+                :disabled="disDevice"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" v-if="disDevice">
+          <el-form-item label="预约检验时间" :prop="disDevice?'':'appointInspDate'" required>
+            <el-date-picker
+                v-model="device.appointInspDate"
+                :disabled="disDevice"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="下次检验时间" :prop="disDevice?'':'nextInspectionDate'" required>
+            <el-date-picker
+                v-model="device.nextInspectionDate"
+                :disabled="disDevice"
+            />
+          </el-form-item>
+        </el-col>
+
+      </el-row>
+      </el-collapse-item>
+    </el-collapse>
+    <!-- 查询组件 -->
+    <query
+        ref="query"
+        :dialog="dialog"
+        :unitNumber="unitNumber"
+        :unitListNumber="unitListNumber"
+        @dialogBool="dialog = false"
+        @queryRequest="queryRequest"
+        :bind-warn-standard-visible="dialog"
+    ></query>
+  </div>
+</template>
+
+<script>
+import linkage from "@/api/util/linkage";
+import Query from "@/components/registration/query";
+import {VesselRules} from "@/object_js/registration/vessel-object";
+
+export default {
+  name: "Vessel",
+  components: {
+    Query
+  },
+  props: {
+    busiObj:Object,
+    device: Object,
+    responseDate: Object,
+    rules: Object,
+    pageIndexes:{
+      type: Number,
+      default() {
+        return 1
+      }
+    },
+    orgList:{
+      type:Array,
+      default() {
+        return [];
+      }
+    },
+    cloneCheckMap: {
+      type:Map,
+      default() {
+        return new Map();
+      }
+    },
+    //免检验标识(免检为false)
+    disDevice:{
+      type:Boolean,
+      default(){
+        return true
+      }
+    },
+    //检验情况折叠开关
+    isActive2:{
+      type:Boolean,
+      default(){
+        return false
+      }
+    },
+    //参数情况折叠开关
+    isActive1:{
+      type:Boolean,
+      default(){
+        return false
+      }
+    }
+  },
+  data() {
+    return {
+      //查询页显示状态
+      dialog: false,
+      unitListNumber: 0,
+      unitNumber: 0,
+      boiTypeList: '',
+      keepWarmFormList: '',
+      pcBarrelList: '',
+      pcHeadList: '',
+      pcLiningList: '',
+      pcJacketList: '',
+      pcIsFastList: '',
+      securityLevelList: '',
+      pcIsHeatInsulationList: '',
+      sealTypeList: '',
+      basesTypeList: '',
+      pressureRatingList: '',
+      categoryPurposeList: '',
+      pcClassifyList: '',
+      transportMediumList: [],
+      transportMediumHazardCategoryList: [],
+      toxicityDegreeList: [],
+      streetList:[],
+      vesselRules:VesselRules,
+      inspectTypeList: [],
+      inspectionItemConclusionList: [],
+      categoryList:[],
+      districtList:[],
+      activeIndex: 0
+    }
+  },
+  created() {
+    this.service = this.responseDate._wb062
+    // 设备类别
+
+    if(!this.disDevice){
+      linkage.filterDel(this.responseDate._2000,this.$store.state.device.device.gasCylinder)
+      linkage.filterDel(this.responseDate._2000,this.$store.state.device.device.oxygenChamber)
+    }
+    this.categoryList = this.responseDate._2000;
+    // 所属管理区
+    this.districtList = this.responseDate._wb043;
+    // 设备种类
+    this.speeType = this.responseDate._wb052;
+
+    this.boiTypeList = this.responseDate._wb088;
+    this.keepWarmFormList = this.responseDate._wb089;
+    //材料
+    this.pcBarrelList = this.responseDate._wb019;
+    this.pcHeadList = this.responseDate._wb019;
+    this.pcLiningList = this.responseDate._wb019;
+    this.pcJacketList = this.responseDate._wb019;
+
+    this.pcIsFastList = this.responseDate._wb048;
+    this.securityLevelList = this.responseDate._wb093;
+
+    this.pcIsHeatInsulationList = this.responseDate._wb094;
+    this.sealTypeList = this.responseDate._wb095;
+
+    this.basesTypeList = this.responseDate._wb096;
+
+    this.pressureRatingList = this.responseDate._wb097;
+    this.categoryPurposeList = this.responseDate._wb098;
+
+    this.pcClassifyList = this.responseDate._wb111;
+
+    this.inspectTypeList = this.responseDate._wb141;
+    this.inspectionItemConclusionList = this.responseDate._wb142;
+
+    //介质
+    this.transportMediumList = this.responseDate._wb092
+    //介质危险类别
+    this.transportMediumHazardCategoryList = this.responseDate._wb143
+
+
+    // 压力容器
+    this.device.equType = '1756311533124407176'
+
+  },
+
+  watch: {
+    device:{
+      handler(newArr) {
+        if (this.device&&newArr.equArea&&newArr.street){
+          this.device.equLocation = '广州市' +linkage.getLinkageTitleById(newArr.equArea,this.districtList)
+              +linkage.getLinkageTitleById(newArr.street,linkage.getLinkageChildrenById(newArr.equArea, this.districtList))
+              +newArr.equDetail
+        }
+      }
+    },
+    isActive1(newVal, oldVal) {
+      this.$nextTick(() => {
+        this.updateCollapse();
+      });
+    },
+    isActive2(newVal, oldVal) {
+      this.$nextTick(() => {
+        this.updateCollapse();
+      });
+    }
+  },
+  methods: {
+    handleClick1() {
+      this.isActive1 = !this.isActive1;
+    },
+    handleClick2() {
+      this.isActive2 = !this.isActive2;
+    },
+    updateCollapse() {
+      const collapseActiveName = [];
+      if (this.isActive1) {
+        collapseActiveName.push('1');
+      }
+      if (this.isActive2) {
+        collapseActiveName.push('2');
+      }
+      this.$refs.myCollapse && this.$refs.myCollapse.setActiveNames(collapseActiveName);
+    },
+    //上一级下拉框选择之后出发
+    categoryChange(selected, current) {
+      let temp = linkage.getLinkageChildrenById(selected, this.categoryList);
+      if (current) {
+        current.equVariety=''
+        current.varietyList = temp;
+        //只有一级设备时将一级设备也赋值到二级设备中
+        if (temp.length === 1 && temp[0].id === selected) {
+          current.equVariety = selected
+        }
+      }
+    },
+    //壳程介质上一级下拉框选择之后出发
+    toxicityChange(selected, current) {
+      let temp = linkage.getLinkageChildrenById(selected, this.transportMediumHazardCategoryList);
+      if (current) {
+        current.toxicityDegree=''
+        current.toxicityDegreeList = temp;
+      }
+    },
+    // 区和街道的二级联动
+    districtChange(selected, current) {
+      let temp = linkage.getLinkageChildrenById(selected, this.districtList);
+      if (current) {
+        current.streetList = []
+        current.street = "";
+        this.$set(current,'streetList',temp);
+      }
+      return temp;
+    },
+
+    // 查询单位信息
+    queryRequest(baseInfo, unitNumber, unitListNumber) {
+
+      if (unitNumber === 1) {
+        this.device.propertyUnitName = baseInfo.entname
+        if(this.busiObj.handleTypeTwo!==this.serVar.changeOfCompanyName){
+          this.device.propertyUniscid = baseInfo.uniscid
+        }
+      }
+      this.unitNumber = 0;
+    },
+    // 查询单位信息
+    queryBaseInfo(unitNumber, unitListNumber) {
+      this.dialog = !this.dialog;
+      this.unitNumber = unitNumber;
+      this.unitListNumber = unitListNumber;
+    },
+    // 校验输入框是否可输入
+    checkDeviceInfo(label,...args) {
+      /*
+      判断原始数据为为空时可修改
+      条件：
+      1.map中存在当前设备代码的对象
+      2.（文本框（域）和下拉框）当前当前设备代码对象的字段是否为空
+      3.（数字输入框）为0时可修改
+      */
+      let handleTypeOne = this.busiObj.handleTypeOne
+      let handleTypeTwo = this.busiObj.handleTypeTwo
+      let handleTypeThree = this.busiObj.handleTypeThree
+      let handleTypeFour = this.busiObj.handleTypeFour
+      let b = !(!this.cloneCheckMap.get(this.device.equipmentCode) ||
+          !this.cloneCheckMap.get(this.device.equipmentCode)[label] ||
+          Number(this.cloneCheckMap.get(this.device.equipmentCode)[label]) === 0);
+      let busi =true
+      args.forEach(item =>{
+        busi=busi &&(handleTypeOne!==item&&handleTypeTwo!==item&&handleTypeThree!==item&&handleTypeFour!==item)
+      })
+      return b&&busi;
+    },
+
+  },
+  computed: {
+    serVar(){
+      return this.$store.state.regServiceVar.pressure
+    },
+    collapseActiveName() {
+      return [];
+    }
+  },
+}
+</script>
+
+<style scoped>
+
+</style>
